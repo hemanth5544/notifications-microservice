@@ -31,6 +31,7 @@ async function startServer() {
 		const sequelize = Database.getInstance();
 		await sequelize.authenticate();
 		await sequelize.sync();
+		await sequelize.sync({ alter: true });
 
 		const server = app.listen(config.SERVER_PORT, () => {
 			logger.info(

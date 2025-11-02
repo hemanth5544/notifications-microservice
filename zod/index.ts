@@ -5,4 +5,5 @@ extendZodWithOpenApi(z);
 
 export * from "./Health/health";
 export * from "./User/user";
+export * from "./notifications/notifications";
 

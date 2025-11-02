@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["server/**/*.ts"]
+		"includes": ["server/**/*.ts", "./"]
 	},
 	"formatter": {
 		"enabled": true,
