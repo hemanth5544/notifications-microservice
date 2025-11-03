@@ -17,9 +17,8 @@ const filteredDoc = replaceCustomFileTypesToOpenApiCompatible(
 );
 
 const formattedDoc = JSON.parse(filteredDoc);
-console.log("Generated OpenAPI documentation", formattedDoc);
 
-const filePaths = ["./openapi.json", "../src/openapi.json"];
+const filePaths = ["./openapi.json"];
 
 filePaths.forEach((filePath) => {
 	fs.writeFile(filePath, JSON.stringify(formattedDoc, null, 2), (err) => {
