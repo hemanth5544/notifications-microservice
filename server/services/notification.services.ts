@@ -23,20 +23,18 @@ class NotificationService {
 		subject: string,
 		text: string,
 		html?: string,
-		providerType?: string,
+		// providerType?: string,
 	): Promise<void> {
-		if (providerType && this.providerList[providerType]) {
-			return await this.providerList[providerType].send({
-				to,
-				subject,
-				text,
-				html,
-			});
-		}else{
-        throw new Error("Notification type is not supported");
+		// if (providerType && this.providerList[providerType]) {
+		// return await this.providerList[providerType].send({
+		// 	to,
+		// 	subject,
+		// 	text,
+		// 	html,
+		// });
+		// }
 
-        }
-
+		await this.mailer.send({ to, subject, text, html });
 	}
 
 	registerProvider(name: string, provider: Provider) {

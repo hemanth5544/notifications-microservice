@@ -26,6 +26,8 @@ export class SendMail extends NotificationProvider {
 	}
 
 	async send({ to, subject, text, html }: SendMailParams): Promise<void> {
+		console.log("herrrrrrrrrrr", to, subject, text);
+
 		try {
 			const info = await this.transporter.sendMail({
 				from:
