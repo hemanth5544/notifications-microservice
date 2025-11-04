@@ -1,22 +1,25 @@
 import type { Request, Response } from "express";
-import { userService } from "@services/user.services";
-import { logger } from "@logger/logger";
-import { ZUser } from "@zod/User/user";
-import { ZNotification } from "@zod/notifications/notifications";
 import { notificationService } from "@services/notification.services";
 
 export const notificationsHandler = {
 	async sendNotifcication(req: Request, res: Response) {
 		try {
-			await notificationService.send(
-				"hemanth",
-				"hemanth",
-				"hemanth",
-				"hemanth",
-			);
-			res.status(200).json({ success: true, data: "datta sent" });
+			// Example request body structure:
+			req.body = {
+				type: "email",
+				payload: {
+					to: "user@example.com",
+					subject: "Hello",
+					text: "Welcome!",
+				},
+			};
+
+			await notificationService.send(req.body);
+
+			res.status(200).json({ success: true, data: "Notification sent" });
 		} catch (error: any) {
-			console.log(error);
+			console.error(error);
+			res.status(500).json({ success: false, error: error.message });
 		}
 	},
 };

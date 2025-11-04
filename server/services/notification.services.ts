@@ -1,44 +1,33 @@
-import { SendMail } from "entities/nodeMailer";
+// src/services/notification.services.ts
 
-interface Provider {
-	send: (params: {
-		to: string;
-		subject: string;
-		text: string;
-		html?: string;
-	}) => Promise<void>;
+import { SendMail } from "entities/nodeMailer";
+import { Twilio } from "entities/twilo";
+
+type NotificationType = "email" | "sms";
+
+interface NotificationPayload {
+	type: NotificationType;
+	payload: any;
 }
 
-class NotificationService {
-	private providerList: Record<string, Provider>;
-	private mailer: SendMail;
+export class NotificationService {
+	private mailProvider: SendMail;
+	private smsProvider: Twilio;
 
 	constructor() {
-		this.providerList = {};
-		this.mailer = new SendMail();
+		this.mailProvider = new SendMail();
+		this.smsProvider = new Twilio();
 	}
 
-	async send(
-		to: string,
-		subject: string,
-		text: string,
-		html?: string,
-		// providerType?: string,
-	): Promise<void> {
-		// if (providerType && this.providerList[providerType]) {
-		// return await this.providerList[providerType].send({
-		// 	to,
-		// 	subject,
-		// 	text,
-		// 	html,
-		// });
-		// }
-
-		await this.mailer.send({ to, subject, text, html });
-	}
-
-	registerProvider(name: string, provider: Provider) {
-		this.providerList[name] = provider;
+	async send({ type, payload }: NotificationPayload) {
+		switch (type) {
+			case "email":
+				return this.mailProvider.send(payload);
+			case "sms":
+				return this.smsProvider.send(payload);
+			default:
+				throw new Error(`Unsupported notification type: ${type}`);
+		}
 	}
 }
 
