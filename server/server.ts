@@ -59,6 +59,13 @@ async function startServer() {
 			}, 10000);
 		});
 
+		process.on("unhandledRejection", (reason) => {
+			console.error("UNHANDLED REJECTION:", reason);
+		});
+		process.on("uncaughtException", (err) => {
+			console.error("UNCAUGHT EXCEPTION:", err);
+		});
+
 		process.on("SIGTERM", async () => {
 			logger.info("Received SIGTERM, starting graceful shutdown...");
 

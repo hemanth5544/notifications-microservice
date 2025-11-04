@@ -1,8 +1,4 @@
 export class NotificationProvider {
-	// async send() {
-	//     throw new Error("Have to override Notification.send(...)");
-	// }
-
 	throwGeneralAxiosError(error: any) {
 		let msg = "Error: " + error + " ";
 

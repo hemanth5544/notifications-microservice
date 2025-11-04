@@ -8,5 +8,5 @@ const c = initContract();
 export const apiContract = c.router({
 	Health: healthContract,
 	Users: userContract,
-	Notifications: notificationsContract
+	Notifications: notificationsContract,
 });
