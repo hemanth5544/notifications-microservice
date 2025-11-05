@@ -1,29 +1,22 @@
 import { NotificationProvider } from "../entities/provider";
 import axios from "axios";
+import config from "@config/config";
 
 interface SendMailParams {
-	twilioApiKey: string;
-	twilioAccountSID: string;
 	twilioFromNumber: string;
 	twilioToNumber: string;
-	twilioAuthToken: string;
 	msg: string;
 }
 
 export class Twilio extends NotificationProvider {
 	name = "twilio";
 
-	async send({
-		twilioApiKey,
-		twilioAccountSID,
-		twilioFromNumber,
-		twilioToNumber,
-		msg,
-		twilioAuthToken,
-	}: SendMailParams) {
+	async send({ twilioFromNumber, twilioToNumber, msg }: SendMailParams) {
 		const okMsg = "Sent Successfully.";
 
-		let apiKey = twilioApiKey;
+		let apiKey = config.TWILIO_API_KEY;
+		let twilioAuthToken = config.TWILIO_AUTH_TOKEN;
+		let twilioAccountSID = config.TWILIO_ACCOUNT_SID;
 
 		try {
 			let config = {

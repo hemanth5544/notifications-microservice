@@ -38,6 +38,12 @@ const configSchema = z.object({
 	NEW_RELIC_APP_LOG_FORWARDING_ENABLED: z.string(),
 	NEW_RELIC_DISTRIBUTED_TRACING_ENABLED: z.string(),
 	NEW_RELIC_DEBUG_LOGGING: z.string(),
+	SMTP_USER: z.string(),
+	SMTP_PASS: z.string(),
+	SMTP_HOST: z.string(),
+	TWILIO_AUTH_TOKEN: z.string(),
+	TWILIO_ACCOUNT_SID: z.string(),
+	TWILIO_API_KEY: z.string(),
 });
 
 const parsedConfig = configSchema.safeParse(process.env);

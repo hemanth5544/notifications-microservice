@@ -1,5 +1,6 @@
 import nodemailer, { Transporter } from "nodemailer";
 import { NotificationProvider } from "../entities/provider";
+import config from "@config/config";
 
 interface SendMailParams {
 	to: string;
@@ -15,25 +16,21 @@ export class SendMail extends NotificationProvider {
 		super();
 
 		this.transporter = nodemailer.createTransport({
-			host: process.env.SMTP_HOST || "smtp.gmail.com",
-			port: Number(process.env.SMTP_PORT) || 587,
+			host: config.SMTP_HOST || "smtp.gmail.com",
+			// port: Number(config.) || 587,
 			secure: false,
 			auth: {
-				user: process.env.SMTP_USER || "",
-				pass: process.env.SMTP_PASS || "",
+				user: config.SMTP_USER || "",
+				pass: config.SMTP_PASS || "",
 			},
 		});
 	}
 
 	async send({ to, subject, text, html }: SendMailParams): Promise<void> {
-		console.log("herrrrrrrrrrr", to, subject, text);
 
 		try {
 			const info = await this.transporter.sendMail({
-				from:
-					process.env.SMTP_FROM ||
-					process.env.SMTP_USER ||
-					"noreply@example.com",
+				from: config.SMTP_USER,
 				to,
 				subject,
 				text,

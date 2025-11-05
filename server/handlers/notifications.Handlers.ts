@@ -4,15 +4,7 @@ import { notificationService } from "@services/notification.services";
 export const notificationsHandler = {
 	async sendNotifcication(req: Request, res: Response) {
 		try {
-			// Example request body structure:
-			req.body = {
-				type: "email",
-				payload: {
-					to: "user@example.com",
-					subject: "Hello",
-					text: "Welcome!",
-				},
-			};
+	
 
 			await notificationService.send(req.body);
 
