@@ -16,9 +16,9 @@ export class SendMail extends NotificationProvider {
 		super();
 
 		this.transporter = nodemailer.createTransport({
-			host: config.SMTP_HOST || "smtp.gmail.com",
+  			service: "gmail",
 			// port: Number(config.) || 587,
-			secure: false,
+			// secure: false,
 			auth: {
 				user: config.SMTP_USER || "",
 				pass: config.SMTP_PASS || "",
